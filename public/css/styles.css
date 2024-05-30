@@ -137,6 +137,26 @@ p {
   font-size: 1.2em;
 }
 
+/* CREATE / EDIT FORM */
+.tought-form-container a {
+  color: var(--color-orange);
+}
+
+.tought-form-container:hover {
+  color: #fff;
+}
+
+.tought-form-container h1 {
+  margin: 1em 0;
+  color: #fff;
+  border-left: 4px solid var(--color-orange);
+  padding: 0.3em;
+}
+
+.tought-form-container form {
+  max-width: 30%;
+  margin-top: 1.5em;
+}
 /* FOOTER */
 
 footer {
