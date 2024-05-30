@@ -9,7 +9,6 @@ module.exports = class AuthController {
     const { email, password } = req.body;
     // find user
     const user = await User.findOne({ where: { email: email } });
-    console.log(user);
 
     if (!user) {
       req.flash("message", "Usuário não encontrado!");
@@ -20,7 +19,6 @@ module.exports = class AuthController {
     // check if passwords match
 
     const passwordMatch = bcrypt.compareSync(password, user.password);
-    console.log(passwordMatch);
 
     if (!passwordMatch) {
       req.flash("message", "Senha inválida!");
