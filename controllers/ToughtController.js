@@ -21,7 +21,13 @@ module.exports = class ToughtController {
 
     const toughts = user.Toughts.map((result) => result.dataValues);
 
-    res.render("toughts/dashboard", { toughts });
+    let emptyToughts = false;
+
+    if (toughts.length === 0) {
+      emptyToughts = true;
+    }
+
+    res.render("toughts/dashboard", { toughts, emptyToughts });
   }
 
   static createTought(req, res) {
@@ -44,6 +50,20 @@ module.exports = class ToughtController {
       });
     } catch (err) {
       console.log("Aconteceu um erro:" + err);
+    }
+  }
+
+  static async removeTought(req, res) {
+    const id = req.body.id;
+    const UserId = req.session.userid;
+    try {
+      await Tought.destroy({ where: { id: id, UserId: UserId } });
+      req.flash("message", "Pensamento removido com sucesso!");
+      req.session.save(() => {
+        res.redirect("/toughts/dashboard");
+      });
+    } catch (err) {
+      console.log(`Aconteceu o erro: ${err}`);
     }
   }
 };
